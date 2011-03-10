@@ -1,27 +1,16 @@
-# Class: ruby::gems
-#
 # Install Ruby gems support.
 #
-# Requires:
-#   - Package[ruby]
+# == Requirements
 #
-class ruby::gems {
-  include ruby
+# - Class[ruby]
+#
+class ruby::gems
+{
+	include ruby
 
-  case $operatingsystem {
-    openbsd: {
-      $package_name = "ruby-gems"
-      $gem = "/usr/local/bin/gem"
-    }
-    default: {
-      $package_name = "ruby-gems"
-      $gem = "/usr/bin/gem"
-    }
-  }
+	$class = inline_template("${name}::<%= operatingsystem.downcase %>")
 
-  package { ruby-gems:
-    name => $package_name,
-    ensure => installed,
-    require => Package[ruby]
-  }
+	class { $class:
+		require => Class[ruby]
+	}
 }
