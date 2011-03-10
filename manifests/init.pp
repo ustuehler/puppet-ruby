@@ -34,6 +34,3 @@ class ruby::debian
 {
   package { ruby: }
 }
-
-import 'classes/*.pp'
-import 'defines/*.pp'
