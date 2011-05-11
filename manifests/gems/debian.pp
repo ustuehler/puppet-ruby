@@ -8,7 +8,7 @@ class ruby::gems::debian
 		ensure => installed
 	}
 
-	exec { "/bin/sh -c 'mv /var/lib/gems/1.8/bin/* /usr/local/bin; rmdir /var/lib/gems/1.8/bin'":
+	exec { "/bin/sh -c 'mv -f /var/lib/gems/1.8/bin/* /usr/local/bin; rm -rf /var/lib/gems/1.8/bin'":
 		unless => "/usr/bin/test -h /var/lib/gems/1.8/bin",
 		require => Package['rubygems1.8']
 	}->file { "/var/lib/gems/1.8/bin":
