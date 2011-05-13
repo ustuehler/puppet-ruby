@@ -4,9 +4,16 @@ class ruby::stomp
 	include ruby
 
 	case $operatingsystem {
+	    OpenBSD: {
+		package { ruby-stomp:
+			ensure => present,
+			require => Class[ruby]
+		}
+	    }
+
 	    Debian: {
 		package { libstomp-ruby:
-			ensure => installed,
+			ensure => present,
 			require => Class[ruby]
 		}
 	    }
