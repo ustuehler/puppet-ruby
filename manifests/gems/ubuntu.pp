@@ -1,7 +1,5 @@
-# Install Rubygems for Ubuntu.  This class simply requires the
-# ruby::gems::debian class as Ubuntu and Debian are unlikely to
-# differ in their Ruby setup.
-class ruby::gems::ubuntu
+# Install RubyGems using Ubuntu packages
+class ruby::gems::ubuntu inherits ruby::gems::debian
 {
-	require ruby::gems::debian
+  # nothing special to do for Ubuntu
 }
