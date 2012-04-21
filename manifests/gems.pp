@@ -1,16 +1,16 @@
-# Install Ruby gems support.
+#  Enable system-wide RubyGems support
 #
-# == Requirements
+# == Facts
 #
-# - Class[ruby]
-#
+# - *operatingsystem*: Use to select the appropriate installation mechanism
+#   for your operating system.
 class ruby::gems
 {
-	include ruby
+  include ruby
 
-	$class = inline_template("${name}::<%= operatingsystem.downcase %>")
+  $operatingsystem_class = downcase($::operatingsystem)
 
-	class { $class:
-		require => Class[ruby]
-	}
+  class { $operatingsystem_class:
+    require => Class['ruby']
+  }
 }
