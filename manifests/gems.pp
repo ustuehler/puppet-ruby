@@ -8,7 +8,7 @@ class ruby::gems
 {
   include ruby
 
-  $operatingsystem_class = downcase($::operatingsystem)
+  $operatingsystem_class = downcase("${name}::${::operatingsystem}")
 
   class { $operatingsystem_class:
     require => Class['ruby']
