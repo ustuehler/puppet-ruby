@@ -4,7 +4,7 @@
 #
 # - *operatingsystem*: The best installation method (Gems vs. native
 #   packages) is chosen according to the operating system.
-class ruby::activerecord
+class ruby::active_record
 {
   validate_string($::operatingsystem)
 
@@ -16,7 +16,13 @@ class ruby::activerecord
     }
 
     default: {
-      fail("$::operatingsystem is currently not supported")
+      include ruby::gems
+
+      package { 'activerecord':
+        provider => gem,
+        ensure   => present,
+        require  => Class['ruby::gems']
+      }
     }
   }
 }
